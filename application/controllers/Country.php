@@ -9,8 +9,8 @@ class Country extends CI_Controller {
 
         $config = array();
         //$config["base_url"] = base_url() . "admin/Location";
-        $this->load->model('Model_location');
-        $total_row = $this->Model_location->record_count();
+        $this->load->model('Model_country');
+        $total_row = $this->Model_country->record_count();
         $config["total_rows"] = $total_row;
         $config["per_page"] = 5;
         $config['use_page_numbers'] = TRUE;
@@ -26,22 +26,22 @@ class Country extends CI_Controller {
         } else {
             $page = 1;
         }
-        $data["locations"] = $this->Model_location->locationsListing($config["per_page"], $page);
+        $data["employees"] = $this->Model_country->countryListing($config["per_page"], $page);
         $str_links = $this->pagination->create_links();
         $data["links"] = explode('&nbsp;', $str_links);
 
         // View data according to array.
-        $this->load->view("admin/location", $data);
+        $this->load->view("admin/country", $data);
     }
 
-    public function addCountry($viewtype) {
+    public function addCountry() {
 
         if (!empty($_POST)) {
             $this->form_validation->set_rules('country_id', 'Country ID', 'required');
             $this->form_validation->set_rules('country_name', 'Country Name', 'required');
-            
+
             if ($this->form_validation->run() == FALSE) {
-                $this->load->view(($viewtype=='form')?'admin/addcountry':'admin/formaddcountry');
+                $this->load->view(($viewtype == 'form') ? 'admin/addcountry' : 'admin/formaddcountry');
             } else {
                 $country_id = $this->input->post("country_id");
                 $country_name = $this->input->post("country_name");
@@ -67,61 +67,53 @@ class Country extends CI_Controller {
     }
 
     function edit($id) {
-        $this->load->model('Model_location');
         $this->load->model('Model_country');
-        $location = $this->Model_location->editLocation($id);
-        $country = $this->Model_country->getCountries();
-        $data['location'] = $location;
-        $data['countries'] = $country;
-        $this->load->view('admin/editlocation', $data);
+        $country = $this->Model_country->editCountry($id);
+        $data['country'] = $country;
+        $this->load->view('admin/editcountry', $data);
     }
 
-    public function LocationUpdate() {
+    public function countryUpdate() {
 
         if (!empty($_POST)) {
-            $this->form_validation->set_rules('branch_name', 'Branch Name', 'required');
-            $this->form_validation->set_rules('country', 'Country', 'required');
+            $this->form_validation->set_rules('country_name', 'Country Name', 'required');
 
             if ($this->form_validation->run() == FALSE) {
-                $this->load->view('admin/editlocation');
+                $this->load->view('admin/editcountry');
             } else {
-                $id = $this->input->post("branch_id");
-                $branch_name = $this->input->post("branch_name");
-                $country = $this->input->post("country");
+                $id = $this->input->post("id");
+                $country_name = $this->input->post("country_name");
 
                 $update_data = array(
-                    'id' => $id,
-                    'branch_name' => $branch_name,
-                    'country' => $country,
+                    'country' => $country_name,
                 );
 
-                $this->load->model('Model_location');
-                $res = $this->Model_location->locationUpdate($update_data);
-                print $this->db->last_query();
+                $this->load->model('Model_country');
+                $res = $this->Model_country->countryUpdate($id,$update_data);
+                echo $this->db->last_query();
                 if ($res == true) {
                     $this->session->set_flashdata('success', "Successfully updated Location!");
-                    redirect('Location');
+                    redirect('Country');
                 } else {
                     $this->session->set_flashdata('error', "Unable to update Location , Please check");
-                    $this->load->view('admin/editlocation');
-                    redirect('Location');
+                    redirect('Country');
                 }
             }
         } else {
-            $this->load->view("admin/editlocation");
+            $this->load->view("admin/editcountry");
         }
     }
 
     function delete($id) {
-        $this->load->model('Model_location');
-        $result = $this->Model_location->locationsDelete($id);
+        $this->load->model('Model_country');
+        $result = $this->Model_country->countryDelete($id);
         if ($result === true) {
-            $this->session->set_flashdata('success', "Successfully deleted location!");
-            redirect('location');
+            $this->session->set_flashdata('success', "Successfully deleted Country!");
+            redirect('Country');
         } else {
-            $this->session->set_flashdata('error', "Unable to delete location Please check");
-            $this->load->view('admin/location');
-            redirect('location');
+            $this->session->set_flashdata('error', "Unable to delete Country Please check");
+            $this->load->view('admin/country');
+            redirect('Country');
         }
     }
 

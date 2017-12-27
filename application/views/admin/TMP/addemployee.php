@@ -1,18 +1,18 @@
 
 <?php include('inc/header.php'); ?>
 
-
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
-        <h1> Asset<small>Location</small>
+        <h1> Software<small>Employee</small>
         </h1>
         <ol class="breadcrumb">
             <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-            <li class="active">Edit Location</li>
+            <li class="active">header Listing</li>
         </ol>
     </section>
+
 
     <!-- Main content -->
     <section class="content">
@@ -28,7 +28,7 @@
                 <div class="col-xs-12">
                     <div class="box">
                         <div class="box-header">
-                            <h3 class="box-title">Edit Location</h3>
+                            <h3 class="box-title">Add Employee</h3>
                             <div class="msg" style="color:red;">
                                 <?php
                                 if ($this->session->flashdata('success')) {
@@ -42,29 +42,13 @@
                             </div>
                         </div><!-- /.box-header -->
                         <div class="box-body table-responsive no-padding">
-                            <form action="<?php echo base_url('Location/locationUpdate'); ?>" method="post">
-                                <input type="hidden" name="branch_id"  value="<?php echo $location->id; ?>" />
+                            <form action="<?php echo base_url('Employee/addEmployee'); ?>" method="post">
                                 <table class="table table-hover">
                                     <tr>
-                                        <td>Branch Name</td><td><input type="text" name="branch_name" required value="<?php echo $location->branch_name; ?>"  /></td>
+                                        <td>Employee ID</td><td><input type="text" name="country_id" required ></td>
                                     </tr>
                                     <tr>
-                                        <td>Address</td><td><input type="text" name="address" required value="<?php echo $location->address; ?>" /></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Country</td>
-                                        <td>
-                                            <select name="country" >
-                                                <option value="">Select Country</option>
-                                                <?php
-                                                foreach ($employees as $country) {
-                                                    ?>
-                                                    <option value="<?php echo $country->country_id ?>" <?php echo ($location->country == $country->country_id)?"selected":""; ?>><?php echo $country->country ?></option>
-                                                    <?php
-                                                }
-                                                ?>
-                                            </select>
-                                        </td>
+                                        <td>Employee Name</td><td><input type="text" name="country_name" required ></td>
                                     </tr>
                                     <tr>
                                         <td></td><td><input type="submit" name="submit" value="SAVE" /></td>
@@ -73,8 +57,6 @@
                                         <td></td><td>
                                             <div class="msg" style="color:red;"></div></td>
                                     </tr>
-
-
                                 </table>
                             </form>
 

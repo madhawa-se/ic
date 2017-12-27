@@ -59,7 +59,7 @@
                                             <select name="country" >
                                                 <option value="">Select Country</option>
                                                 <?php
-                                                foreach ($countries as $country) {
+                                                foreach ($employees as $country) {
                                                     ?>
                                                     <option value="<?php echo $country->country_id ?>"><?php echo $country->country ?></option>
                                                     <?php

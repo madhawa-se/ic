@@ -2,7 +2,7 @@
 
 class Model_country extends CI_Model {
 
-    function getCountries() {
+    function getEmployees() {
         $this->db->select('*');
         $query = $this->db->get("country");
         if ($query->num_rows() > 0) {
@@ -17,10 +17,10 @@ class Model_country extends CI_Model {
         return $this->db->count_all("locations");
     }
 
-    function locationsListing($limit, $id) {
+    function countryListing($limit, $id) {
         $this->db->limit($limit);
         $this->db->select('*');
-        $query = $this->db->get("locations");
+        $query = $this->db->get("country");
         if ($query->num_rows() > 0) {
             foreach ($query->result() as $row) {
                 $data[] = $row;
@@ -38,23 +38,27 @@ class Model_country extends CI_Model {
         return false;
     }
 
-    function editlocation($id) {
+    function editCountry($id) {
         $this->db->select('*');
         $this->db->where('id', $id);
-        $query = $this->db->get('locations');
+        $query = $this->db->get('country');
         return $query->row();
     }
 
-    function locationUpdate($update_data) {
+    function countryUpdate($id,$update_data) {
 
-        $this->db->where('id', $update_data['id']);
-        $this->db->update('locations', $update_data);
-        return true;
+        $this->db->where('id',$id);
+        $this->db->update('country', $update_data);
+        if ($this->db->affected_rows() == 1) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
-    function locationsDelete($id) {
+    function countryDelete($id) {
         $this->db->where('id', $id);
-        $this->db->delete('licenses');
+        $this->db->delete('country');
         if ($this->db->affected_rows() == 1) {
             return true;
         } else {

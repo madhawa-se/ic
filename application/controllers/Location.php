@@ -36,8 +36,8 @@ class Location extends CI_Controller {
 
     public function addLocation() {
         $this->load->model('Model_country');
-        $country = $this->Model_country->getCountries();
-        $data['countries'] = $country;
+        $country = $this->Model_country->getEmployees();
+        $data['employees'] = $country;
 
         if (!empty($_POST)) {
             $this->form_validation->set_rules('branch_name', 'Branch Name', 'required');
@@ -81,9 +81,9 @@ class Location extends CI_Controller {
         $this->load->model('Model_location');
         $this->load->model('Model_country');
         $location = $this->Model_location->editLocation($id);
-        $country = $this->Model_country->getCountries();
+        $country = $this->Model_country->getEmployees();
         $data['location'] = $location;
-        $data['countries'] = $country;
+        $data['employees'] = $country;
         $this->load->view('admin/editlocation', $data);
     }
 

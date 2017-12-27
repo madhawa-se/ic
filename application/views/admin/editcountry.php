@@ -6,11 +6,11 @@
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
-        <h1> Asset<small>Location</small>
+        <h1> Asset<small>Country</small>
         </h1>
         <ol class="breadcrumb">
             <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-            <li class="active">Edit Location</li>
+            <li class="active">Edit Country</li>
         </ol>
     </section>
 
@@ -20,7 +20,7 @@
             <div class="row">
                 <div class="col-xs-12 text-right">
                     <div class="form-group">
-                        <a class="btn" href="<?php echo base_url('Location') ?>">View Location</a>
+                        <a class="btn" href="<?php echo base_url('Country') ?>">View Country</a>
                     </div>
                 </div>
             </div>
@@ -28,7 +28,7 @@
                 <div class="col-xs-12">
                     <div class="box">
                         <div class="box-header">
-                            <h3 class="box-title">Edit Location</h3>
+                            <h3 class="box-title">Edit Country</h3>
                             <div class="msg" style="color:red;">
                                 <?php
                                 if ($this->session->flashdata('success')) {
@@ -42,29 +42,11 @@
                             </div>
                         </div><!-- /.box-header -->
                         <div class="box-body table-responsive no-padding">
-                            <form action="<?php echo base_url('Location/locationUpdate'); ?>" method="post">
-                                <input type="hidden" name="branch_id"  value="<?php echo $location->id; ?>" />
+                            <form action="<?php echo base_url('Country/countryUpdate'); ?>" method="post">
+                                <input type="hidden" name="id"  value="<?php echo $country->id; ?>" />
                                 <table class="table table-hover">
                                     <tr>
-                                        <td>Branch Name</td><td><input type="text" name="branch_name" required value="<?php echo $location->branch_name; ?>"  /></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Address</td><td><input type="text" name="address" required value="<?php echo $location->address; ?>" /></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Country</td>
-                                        <td>
-                                            <select name="country" >
-                                                <option value="">Select Country</option>
-                                                <?php
-                                                foreach ($employees as $country) {
-                                                    ?>
-                                                    <option value="<?php echo $country->country_id ?>" <?php echo ($location->country == $country->country_id)?"selected":""; ?>><?php echo $country->country ?></option>
-                                                    <?php
-                                                }
-                                                ?>
-                                            </select>
-                                        </td>
+                                        <td>Country Name</td><td><input type="text" name="country_name" value="<?php echo $country->country?>" required ></td>
                                     </tr>
                                     <tr>
                                         <td></td><td><input type="submit" name="submit" value="SAVE" /></td>
