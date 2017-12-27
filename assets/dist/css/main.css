@@ -1,0 +1,49 @@
+
+   .wrapper {
+       margin-top: 80px;
+       margin-bottom: 20px;
+   }
+
+   .login{
+  width: 60%;
+   }
+
+   .form-signin {
+
+     padding: 30px 38px 66px;
+     margin: 0 auto;
+
+     }
+
+   .form-signin-heading {
+     text-align:center;
+     margin-bottom: 40px;
+   }
+
+   .form-control {
+     position: relative;
+     font-size: 14px;
+     height: auto;
+     padding: 10px;
+   }
+
+
+   .home-header{
+     height: 68px;
+     background:url('../img/bg.jpg');
+
+   }
+
+
+.line1{
+  margin: 10px auto;
+}
+
+.error{
+  color:#a41c2b;
+  font-weight: bold;
+}
+.login{
+  border:1px solid  #a41c2b;
+margin-top: 30px;
+}

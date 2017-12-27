@@ -1,0 +1,3 @@
+/home/sanjay1107/euroeximbank.com/plugins/system/anticopy/anticopy.php
+/home/sanjay1107/euroeximbank.com/plugins/system/anticopy/debug.php
+/home/sanjay1107/euroeximbank.com/blog.old/wp-content/plugins/jetpack/core.php
