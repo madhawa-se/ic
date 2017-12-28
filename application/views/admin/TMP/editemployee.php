@@ -42,11 +42,11 @@
                             </div>
                         </div><!-- /.box-header -->
                         <div class="box-body table-responsive no-padding">
-                            <form action="<?php echo base_url('Employee/countryUpdate'); ?>" method="post">
-                                <input type="hidden" name="id"  value="<?php echo $country->id; ?>" />
+                            <form action="<?php echo base_url('Employee/employeeUpdate'); ?>" method="post">
+                                <input type="hidden" name="id"  value="<?php echo $employee->id; ?>" />
                                 <table class="table table-hover">
                                     <tr>
-                                        <td>Employee Name</td><td><input type="text" name="country_name" value="<?php echo $country->country?>" required ></td>
+                                        <td>Employee Name</td><td><input type="text" name="country_name" value="<?php echo $employee->country?>" required ></td>
                                     </tr>
                                     <tr>
                                         <td></td><td><input type="submit" name="submit" value="SAVE" /></td>

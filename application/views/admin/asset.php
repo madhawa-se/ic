@@ -73,8 +73,11 @@
                       <?php
                       if(!empty($assets))
                       {
-                          foreach($assets as $record)
-                          {
+                          $asset_id='';
+                          foreach($assets as $record){
+                              if($asset_id!=$record->asset_id){
+                            
+                          
                       ?>
                       <tr>
                         <td><a href="<?php echo base_url().'asset/detailListing/'.$record->id; ?>"><?php echo $record->asset_id ?></a></td>
@@ -86,27 +89,22 @@
                         <td><?php echo $record->asset_type ?></td>
                         <td><?php echo $record->location ?></td>
                         <td><?php echo $record->department ?></td>
-                        <td> <?php echo $record->licenses ?>   <ul class="list-inline">
-                          <?php
-                      /**  //  $mul_selection = unserialize($record->licenses);
-$mul_selection = $record->licenses;
-                          foreach ($mul_selection as $value) {
-                            ?>
-                            <li><?php echo $value; ?></li>
-                            <?php
+                          <?php }?>
+                        <?php echo ($asset_id!=$record->asset_id)?"<td>".$record->license_name ."</td>":"<td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td><td>".$record->license_name ."</td><td></td>"?>
 
-                          }
-                        **/  ?>
-                        </ul></td>
-
-
+<?php  if($asset_id!=$record->asset_id){ ?>
                         <td class="text-center">
                             <a class="btn btn-sm btn-info" href="<?php echo base_url().'asset/detailListing/'.$record->id; ?>">
                             <i class="fa fa-eye"> </i> View</a>
 
                         </td>
+                        <?php 
+                        
+                          $asset_id=$record->asset_id;
+                        ?>
                       </tr>
                       <?php
+                          }
                           }
                       }
                       ?>
@@ -132,4 +130,4 @@ $mul_selection = $record->licenses;
     </section>
     <!-- /.content -->
   </div>
-<?php include('inc/footer.php'); ?>
+                      <?php include('inc/footer.php'); ?>

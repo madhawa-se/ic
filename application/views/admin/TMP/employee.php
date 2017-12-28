@@ -57,14 +57,15 @@
                         <th>Employee</th>
                       </tr>
                       <?php
-                      if(!empty($countrys))
+                      if(!empty($employees))
                       {
-                          foreach($countrys as $country)
+                          foreach($employees as $employee)
                           {
                       ?>
                       <tr>
 
-                        <td><?php echo $country->country ?></td>
+                          <td><?php echo $employee->emp_id ?></td>
+                        <td><?php echo $employee->emp_name ?></td>
 
                         <td class="text-center">
                             <a class="btn btn-sm btn-info" href="<?php echo base_url().'Employee/edit/'.$country->id; ?>"><i class="fa fa-pencil"></i></a>

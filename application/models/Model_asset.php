@@ -10,7 +10,10 @@ class Model_asset extends CI_Model {
     function assetListing($limit, $id) {
         $this->db->limit($limit);
         $this->db->select('*');
-        $query = $this->db->get("assets");
+        $this->db->from('assets');
+        $this->db->join('license_registry', 'license_registry.asset_id = assets.asset_id');
+        $this->db->join('licenses', 'licenses.license_id = license_registry.license_id');
+        $query = $this->db->get();
         if ($query->num_rows() > 0) {
             foreach ($query->result() as $row) {
                 $data[] = $row;
