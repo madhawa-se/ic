@@ -1,16 +1,10 @@
 <?php
 
-class Model_employee extends CI_Model {
+class Model_employee extends MY_Model {
 
-    function getEmployees() {
-        $this->db->select('*');
-        $query = $this->db->get("employee");
-        if ($query->num_rows() > 0) {
-            $data=$query->result();
-            return $data;
-        }
-        return false;
-    }
+    protected $table_name = 'employee';
+    protected $primary_key = 'id';
+
 }
 
 ?>

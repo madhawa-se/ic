@@ -1,16 +1,10 @@
 <?php
 
-class Model_manufacturer extends CI_Model {
+class Model_manufacturer extends MY_Model {
 
-    function getManufacturers() {
-        $this->db->select('*');
-        $query = $this->db->get("manufacturer");
-        if ($query->num_rows() > 0) {
-            $data=$query->result();
-            return $data;
-        }
-        return false;
-    }
+    protected $table_name = 'manufacturer';
+    protected $primary_key = 'id';
+
 }
 
 ?>

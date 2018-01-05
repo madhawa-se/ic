@@ -4,7 +4,7 @@
         <div class="row">
             <div class="col-xs-12 text-right">
                 <div class="form-group">
-                    <a class="btn btn-primary" href="<?php echo base_url('Employee/addEmployee') ?>"><i class="fa fa-plus"></i> Add Employee</a>
+                    <a class="btn btn-primary" href="<?php echo base_url($table_name.'/add') ?>"><i class="fa fa-plus"></i> Add <?php echo $table_name ?></a>
                 </div>
             </div>
         </div>
@@ -50,12 +50,12 @@
                                     <?php
                                     for ($i = 0; $i < sizeof($column_names); $i++) {
                                         $column_name = $column_names[$i];
-                                        echo "<td>$record[$column_name]</td>";
+                                        echo "<td>{$record->$column_name}</td>";
                                     }
                                     ?>     
 
                                     <td class="">
-                                        <a class="btn btn-sm btn-info" href="<?php echo base_url() . 'notimplemented/'?>"><i class="fa fa-pencil"></i></a>
+                                        <a class="btn btn-sm btn-info" href="<?php echo base_url($controller_name) . "/edit/{$record->$primary_key}" ?>"><i class="fa fa-pencil"></i></a>
                                         <a class="btn btn-sm btn-danger deleteUser" href="<?php echo base_url() . 'notimplemented/' ?>" onclick="return confirm_delete()"><i class="fa fa-trash"></i></a>
                                     </td>
                                     <td><?php //echo  $record->hostname  ?></td>

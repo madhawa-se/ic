@@ -1,16 +1,10 @@
 <?php
 
-class Model_department extends CI_Model {
+class Model_department extends MY_Model {
 
-    function getDepartments() {
-        $this->db->select('*');
-        $query = $this->db->get("department");
-        if ($query->num_rows() > 0) {
-            $data=$query->result();
-            return $data;
-        }
-        return false;
-    }
+    protected $table_name = 'department';
+    protected $primary_key = 'id';
+
 }
 
 ?>

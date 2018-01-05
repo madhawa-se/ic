@@ -35,70 +35,33 @@ class MY_Model extends CI_Model {
         return false;
     }
 
-    public function get_all($join = null) {
-        $data = array();
-        $Q;
-        if ($join == '') {
-            $this->db->select('*');
-            $Q = $this->db->get($this->table_name);
+    public function get_all($args = null) {
+
+        // seelct all tables if selec is not specified
+        if ($args != NULL && isset($args['select'])) {
+            $this->db->select($args['select']);
         } else {
-            if ($fields = $join['select']) {
-                $this->db->select($fields);
-            }
-            $this->db->from($this->table_name);
-            if (($join_table = $join['table']) && ($condition = $join['condition'])) {
-                $this->db->join($join_table,$condition);
-            }
-            $Q = $this->db->get();
+            $this->db->select('*');
         }
 
-        if ($Q->num_rows() > 0) {
-            foreach ($Q->result_array() as $row) {
-                $data[] = $row;
+
+        // join  tables if join is  specified
+        if ($args != NULL && isset($args['join'])) {
+            $joins = $args['join'];
+            foreach ($joins as $join) {
+                if (isset($join['condition'])) {
+                    $this->db->join($join['table'], $join['condition']);
+                } else {
+                    $this->db->join($join['table']);
+                }
             }
         }
-        $Q->free_result();
-
+        $q = $this->db->get($this->table_name);
+        $data = $q->result();
+        $q->free_result();
         return $data;
+        
     }
-
-//    public function get_all($fields = '', $where = array(), $table = '', $limit = '', $order_by = '', $group_by = '') {
-//        $data = array();
-//        if ($fields != '') {
-//            $this->db->select($fields);
-//        }
-//
-//        if (count($where)) {
-//            $this->db->where($where);
-//        }
-//
-//        if ($table != '') {
-//            $this->table_name = $table;
-//        }
-//
-//        if ($limit != '') {
-//            $this->db->limit($limit);
-//        }
-//
-//        if ($order_by != '') {
-//            $this->db->order_by($order_by);
-//        }
-//
-//        if ($group_by != '') {
-//            $this->db->group_by($group_by);
-//        }
-//
-//        $Q = $this->db->get($this->table_name);
-//
-//        if ($Q->num_rows() > 0) {
-//            foreach ($Q->result_array() as $row) {
-//                $data[] = $row;
-//            }
-//        }
-//        $Q->free_result();
-//
-//        return $data;
-//    }
 
     public function insert($data) {
         $success = $this->db->insert($this->table_name, $data);

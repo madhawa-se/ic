@@ -1,12 +1,11 @@
   <!-- Modal -->
-  <div class="modal fade" id="myModal" role="dialog">
+  <div class="modal fade form-model" id="myModal" role="dialog">
     <div class="modal-dialog">
     
       <!-- Modal content-->
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title">Modal Header</h4>
         </div>
         <div class="modal-body">
         </div>
@@ -36,6 +35,7 @@
 <script src="<?php echo base_url() ?>assets/dist/js/bootstrap.min.js"></script>
 <script src="<?php echo base_url() ?>assets/dist/js/adminlte.min.js"></script>
 <script src="<?php echo base_url() ?>assets/dist/js/multiselect.js"></script>
+<script src="<?php echo base_url() ?>app"></script>
 <script src="<?php echo base_url() ?>assets/dist/js/app.js"></script>
 
 <script>

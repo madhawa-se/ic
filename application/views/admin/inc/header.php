@@ -121,11 +121,15 @@ if( $this->session->userdata('level') == "")
             </span>
           </a>
           <ul class="treeview-menu">
+              <li><a href="<?php echo base_url('asset_type') ?>"> Asset Types</a></li>
+<li><a href="<?php echo base_url('model') ?>"> Asset Models </a></li>
+<li><a href="<?php echo base_url('manufacturer') ?>"> Manufacturers </a></li>
+  <li><a href="<?php echo base_url('suppliers') ?>"> Suppliers</a></li>
+<li><a href="<?php echo base_url('department') ?>"> Departments </a></li>
+      <li><a href="<?php echo base_url('employee') ?>">  Employees</a></li>
             <li><a href="<?php echo base_url('location') ?>"> Locations</a></li>
             <li><a href="<?php echo base_url('country') ?>">Country</a></li>
-            <li><a href="<?php echo base_url('Admin/userListing') ?>"> Suppliers</a></li>
-            <li><a href="<?php echo base_url('Admin/userListing') ?>"> Brand </a></li>
-              <li><a href="<?php echo base_url('Admin/userListing') ?>"> Model </a></li>
+
           </ul>
         </li>
         <li class="treeview">
