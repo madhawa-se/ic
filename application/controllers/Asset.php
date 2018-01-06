@@ -5,9 +5,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Asset extends Crud_Controller {
 
     protected $table_name = 'assets';
-    protected $model_name = 'asset';
+    protected $model_name = 'Model_asset';
     protected $primary_key = 'id';
-    protected $column_names = ['asset_id', 'hostname', 'serial_number', 'manufacturer', 'model_name', 'branch_name', 'asset_type'];
+    protected $column_names = ['asset_id', 'manufacturer', 'hostname', 'serial_number', 'sap_asset_id', 'model_number', 'asset_type', 'location', 'department', 'assigned_to', 'assigned_date', 'notes', 'ip_address', 'mac_address', 'supplier', 'purchase_date', 'warranty_expiry_date', 'managed_by', 'asset_lifetime', 'last_modified_date', 'last_modified_user'];
 
     public function Index() {
         $this->load->model('Model_asset');
@@ -57,21 +57,52 @@ class Asset extends Crud_Controller {
     public function add($ajax = FALSE) {
         //$view,$rules,$msg
         $rules = array(
-            array('field' => 'dept_id', 'label' => 'Department ID', 'rules' => 'required'),
-            array('field' => 'dept_name', 'label' => 'Department Name', 'rules' => 'required'),
-            array('field' => 'location', 'label' => 'Country', 'rules' => 'required')
+            array('field' => 'manufacturer', 'label' => 'Department ID', 'rules' => 'required'),
+            array('field' => 'hostname', 'label' => 'hostname', 'rules' => 'required'),
         );
         $data = array();
+        $this->load->model('Model_manufacturer');
+        $this->load->model('Model_model');
+        $this->load->model('Model_department');
+        $this->load->model('Model_employee');
+        $this->load->model('Model_license');
+        $this->load->model('Model_suppliers');
         $this->load->model('Model_location');
+        $this->load->model('Model_asset_type');
+
         $data['location_list'] = $this->Model_location->get_all();
-        parent::add_row('admin/department_add', $rules, $data, $ajax);
+        $data['model_list'] = $this->Model_model->get_all();
+        $data['department_list'] = $this->Model_department->get_all();
+        $data['employee_list'] = $this->Model_employee->get_all();
+        $data['license_list'] = $this->Model_license->get_all();
+        $data['supplier_list'] = $this->Model_suppliers->get_all();
+        $data['manufacturer_list'] = $this->Model_manufacturer->get_all();
+        $data['asset_type_list'] = $this->Model_asset_type->get_all();
+
+        parent::add_row('admin/asset_add', $rules, $data, $ajax);
     }
 
     public function update() {
         $rules = array(
-            array('field' => 'dept_id', 'label' => 'Department ID', 'rules' => 'required'),
-            array('field' => 'dept_name', 'label' => 'Department Name', 'rules' => 'required'),
-            array('field' => 'location', 'label' => 'Country', 'rules' => 'required')
+            array('field' => 'manufacturer', 'label' => 'Department ID', 'rules' => 'required'),
+            array('field' => 'hostname', 'label' => 'hostname', 'rules' => 'required'),
+//            array('field' => 'serial_number', 'label' => 'Country', 'rules' => 'required'),
+//            array('field' => 'sap_asset_id', 'label' => 'Country', 'rules' => 'required'),
+//            array('field' => 'model_number', 'label' => 'Country', 'rules' => 'required'),
+//            array('field' => 'asset_type', 'label' => 'Country', 'rules' => 'required'),
+//            array('field' => 'location', 'label' => 'Country', 'rules' => 'required'),
+//            array('field' => 'department', 'label' => 'Country', 'rules' => 'required'),
+//            array('field' => 'assigned_to', 'label' => 'Country', 'rules' => 'required'),
+//            array('field' => 'assigned_date', 'label' => 'Country', 'rules' => 'required'),
+//            array('field' => 'notes', 'label' => 'Country', 'rules' => 'required'),
+//            array('field' => 'licenses', 'label' => 'Country', 'rules' => 'required'),
+//            array('field' => 'ip_address', 'label' => 'Country', 'rules' => 'required'),
+//            array('field' => 'secondary_ip_address', 'label' => 'Country', 'rules' => 'required'),
+//            array('field' => 'purchase_date', 'label' => 'Country', 'rules' => 'required'),
+//            array('field' => 'warranty_expiry_date', 'label' => 'Country', 'rules' => 'required'),
+//            array('field' => 'managed_by', 'label' => 'Country', 'rules' => 'required'),
+//            array('field' => 'asset_lifetime', 'label' => 'Country', 'rules' => 'required'),
+//            array('field' => 'last_modified_date', 'label' => 'Country', 'rules' => 'required'),
         );
         parent::update_row('admin/department_edit', $rules);
     }
