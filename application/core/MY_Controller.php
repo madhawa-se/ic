@@ -126,7 +126,9 @@ class Crud_Controller extends MY_Controller {
 
 
     function add_row($view, $rules, $data = NULL, $ajax = FALSE) {
-
+        if(!$data) {
+            $data=array();
+        }
         $data['ajax'] = $ajax;
         if (!empty($_POST)) {
             $this->form_validation->set_rules($rules);
@@ -182,8 +184,8 @@ class Crud_Controller extends MY_Controller {
     }
 
     protected function ajax_return($status, $insert_id, $msg) {
-        $data=array("status"=>$status,"msg"=>$msg);
-        if($status) {
+        $data = array("status" => $status, "msg" => $msg);
+        if ($status) {
             $this->load->model($this->model_name);
             $column_data = $this->{$this->model_name}->get_all();
             $options = array();
@@ -191,16 +193,15 @@ class Crud_Controller extends MY_Controller {
                 $options[$column->{$this->primary_key}] = $column->{$this->display_column};
             }
             $dropdown = form_dropdown('new', $options, $insert_id);
-            $data['dropdown']=$dropdown;
+            $data['dropdown'] = $dropdown;
         }
         $this->serve_json($data);
     }
 
     private function serve_json($data) {
-        $json_data=json_encode($data);
+        $json_data = json_encode($data);
         header('Content-Type: application/json');
         echo $json_data;
-        
     }
 
 }

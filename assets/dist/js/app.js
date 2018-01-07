@@ -3,7 +3,8 @@ $(document).ready(function () {
     extendJ();
     formHandle();
     var model = $(".form-model");
-    $(".model-trigger").on('click', function () {
+    $(document).on("click",".model-trigger",function(){
+        console.log("clicked");
         var prefix = 'true';
         var modelBtn = $(this);
         drop = modelBtn.parent('td').find('select');
