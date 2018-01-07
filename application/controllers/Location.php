@@ -16,7 +16,7 @@ class Location extends Crud_Controller {
             'join' => array(
                 array(
                     'table' => 'country',
-                    'condition' => 'locations.country=country.country_id'
+                    'condition' => 'locations.country=country.id'
                 )
             )
         ));

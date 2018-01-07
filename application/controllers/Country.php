@@ -6,6 +6,7 @@ class Country extends Crud_Controller {
 
     protected $table_name = 'country';
     protected $primary_key = 'id';
+    protected $display_column='country';
     protected $column_names = ['country_id', 'country'];
 
     public function Index() {

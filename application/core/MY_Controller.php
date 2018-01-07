@@ -12,6 +12,7 @@ class Crud_Controller extends MY_Controller {
 
     protected $table_name = '';
     protected $primary_key = '';
+    protected $display_column = '';
     protected $model_name = '';
     protected $column_names = [];
     protected $controller_name = '';
@@ -125,7 +126,8 @@ class Crud_Controller extends MY_Controller {
 
 
     function add_row($view, $rules, $data = NULL, $ajax = FALSE) {
-        $data['ajax']=$ajax;
+
+        $data['ajax'] = $ajax;
         if (!empty($_POST)) {
             $this->form_validation->set_rules($rules);
             if ($this->form_validation->run() == FALSE) {
@@ -137,13 +139,24 @@ class Crud_Controller extends MY_Controller {
                 }
                 $this->load->model($this->model_name);
                 $res = $this->{$this->model_name}->insert($insert_data);
-                if ($res == true) {
-                    $this->session->set_flashdata('success', "Successfully added {$this->table_name}!");
+                $status = $this->db->affected_rows() > 0;
+                $msg_success = "Successfully added {$this->table_name}!";
+                $msg_fail = "Unable to add {$this->table_name}, Please check";
 
-                    redirect($this->controller_name);
+                if ($ajax) {
+                    if ($status === true) {
+                        $this->ajax_return(true, $res, $msg_success);
+                    } else {
+                        $this->ajax_return(false, '', $msg_fail);
+                    }
                 } else {
-                    $this->session->set_flashdata('error', "Unable to add {$this->table_name}, Please check");
-                    redirect("{$this->controller_name}/add");
+                    if ($status === true) {
+                        $this->session->set_flashdata('success', $msg_success);
+                        redirect($this->controller_name);
+                    } else {
+                        $this->session->set_flashdata('error', $msg_fail);
+                        redirect("{$this->controller_name}/add");
+                    }
                 }
             }
         } else {
@@ -165,6 +178,28 @@ class Crud_Controller extends MY_Controller {
     }
 
     protected function get_add_data() {
+        
+    }
+
+    protected function ajax_return($status, $insert_id, $msg) {
+        $data=array("status"=>$status,"msg"=>$msg);
+        if($status) {
+            $this->load->model($this->model_name);
+            $column_data = $this->{$this->model_name}->get_all();
+            $options = array();
+            foreach ($column_data as $column) {
+                $options[$column->{$this->primary_key}] = $column->{$this->display_column};
+            }
+            $dropdown = form_dropdown('new', $options, $insert_id);
+            $data['dropdown']=$dropdown;
+        }
+        $this->serve_json($data);
+    }
+
+    private function serve_json($data) {
+        $json_data=json_encode($data);
+        header('Content-Type: application/json');
+        echo $json_data;
         
     }
 

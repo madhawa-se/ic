@@ -45,6 +45,7 @@ class Asset extends Crud_Controller {
             )
         ));
         $this->PreviewTable($data_set, 'admin/assets_preview');
+        echo $this->db->last_query();
     }
 
     public function edit($id) {
@@ -80,6 +81,7 @@ class Asset extends Crud_Controller {
         $data['asset_type_list'] = $this->Model_asset_type->get_all();
 
         parent::add_row('admin/asset_add', $rules, $data, $ajax);
+        echo $this->db->last_query();
     }
 
     public function update() {

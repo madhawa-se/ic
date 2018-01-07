@@ -35,7 +35,7 @@
 <script src="<?php echo base_url() ?>assets/dist/js/bootstrap.min.js"></script>
 <script src="<?php echo base_url() ?>assets/dist/js/adminlte.min.js"></script>
 <script src="<?php echo base_url() ?>assets/dist/js/multiselect.js"></script>
-<script src="<?php echo base_url() ?>app"></script>
+<script src="<?php echo base_url() ?>config.js"></script>
 <script src="<?php echo base_url() ?>assets/dist/js/app.js"></script>
 
 <script>

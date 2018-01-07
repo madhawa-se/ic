@@ -27,8 +27,7 @@
                         </div>
                     </div><!-- /.box-header -->
                     <div class="box-body table-responsive no-padding">
-                        <?php var_dump($ajax);?>
-                        <form action="<?php echo base_url('country/add'); ?>" method="post" <?php if(isset($ajax) && $ajax==true){echo 'id=\'ajax-form\'';} ?>>
+                        <form action="<?php echo base_url("country/add".((isset($ajax) && $ajax==true)?'/true':'')); ?>" method="post" <?php if(isset($ajax) && $ajax==true){echo 'id=\'ajax-form\'';} ?>>
                             <table class="table table-hover">
                                 <tr>
                                     <td>Country ID</td><td><input type="text" name="country_id" required ></td>
