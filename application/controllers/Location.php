@@ -46,10 +46,12 @@ class Location extends Crud_Controller {
 
     public function update() {
         $rules = array(
-            array('field' => 'country_id', 'label' => 'Country ID', 'rules' => 'required'),
+            array('field' => 'id', 'label' => 'Country ID', 'rules' => 'required'),
             array('field' => 'country', 'label' => 'Country', 'rules' => 'required')
         );
         parent::update_row('admin/country_edit', $rules);
+        echo $this->db->last_query();
+
     }
 
     public function delete($id) {

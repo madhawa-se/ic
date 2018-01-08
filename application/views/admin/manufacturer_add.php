@@ -28,7 +28,7 @@
                         <form action="<?php echo base_url('manufacturer/add'); ?>" method="post">
                             <table class="table table-hover">
                                 <tbody><tr>
-                                        <td>Manufacturer ID</td><td><input type="text" name="manufacturer_id" required=""></td>
+                                        <td>Manufacturer ID</td><td><input type="text" name="manu_id" required=""></td>
                                     </tr>
                                     <tr>
                                         <td>Manufacturer</td><td><input type="text" name="manufacturer" required=""></td>

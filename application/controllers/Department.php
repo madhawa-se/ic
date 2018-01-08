@@ -15,7 +15,7 @@ class Department extends Crud_Controller {
             'join' => array(
                 array(
                     'table' => 'locations',
-                    'condition' => 'department.location=locations.branch_id'
+                    'condition' => 'department.location=locations.id'
                 )
             )
         ));

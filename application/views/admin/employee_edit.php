@@ -20,10 +20,10 @@
                             <input type="hidden" name="id" value="<?php echo $primary_key ?>"/>
                             <table class="table table-hover">
                                 <tbody><tr>
-                                        <td>Employee ID</td><td><input type="text" name="employee_id" required="" value="<?php echo $table_data->emp_id ?>"></td>
+                                        <td>Employee ID</td><td><input type="text" name="emp_id" required="" value="<?php echo $table_data->emp_id ?>"></td>
                                     </tr>
                                     <tr>
-                                        <td>Employee Name</td><td><input type="text" name="employee_name" required="" value="<?php echo $table_data->emp_name ?>"></td>
+                                        <td>Employee Name</td><td><input type="text" name="emp_name" required="" value="<?php echo $table_data->emp_name ?>"></td>
                                     </tr>
                                 
 

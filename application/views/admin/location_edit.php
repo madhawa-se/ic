@@ -36,7 +36,7 @@
                                                 <?php
                                                 foreach ($country_list as $country) {
                                                     ?>
-                                                    <option value="<?php echo $country->country_id ?>" <?php echo ($table_data->country == $country->country_id)?"selected":""; ?>><?php echo $country->country ?></option>
+                                                    <option value="<?php echo $country->id ?>" <?php echo ($table_data->country == $country->country_id)?"selected":""; ?>><?php echo $country->country ?></option>
                                                     <?php
                                                 }
                                                 ?>

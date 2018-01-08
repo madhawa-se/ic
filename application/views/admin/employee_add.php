@@ -30,10 +30,10 @@
                         <form action="<?php echo base_url('employee/add'); ?>" method="post">
                             <table class="table table-hover">
                                 <tbody><tr>
-                                        <td>Employee ID</td><td><input type="text" name="employee_id" required=""></td>
+                                        <td>Employee ID</td><td><input type="text" name="emp_id" required=""></td>
                                     </tr>
                                     <tr>
-                                        <td>Employee Name</td><td><input type="text" name="employee_name" required=""></td>
+                                        <td>Employee Name</td><td><input type="text" name="emp_name" required=""></td>
                                     </tr>
                                   
                                     <tr>

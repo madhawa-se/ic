@@ -20,7 +20,7 @@
                             <input type="hidden" name="id" value="<?php echo $primary_key ?>"/>
                             <table class="table table-hover">
                                 <tbody><tr>
-                                        <td>Manufacturer ID</td><td><input type="text" name="manufacturer_id" required="" value="<?php echo $table_data->manu_id ?>"></td>
+                                        <td>Manufacturer ID</td><td><input type="text" name="manu_id" required="" value="<?php echo $table_data->manu_id ?>"></td>
                                     </tr>
                                     <tr>
                                         <td>Manufacturer</td><td><input type="text" name="manufacturer" required="" value="<?php echo $table_data->manufacturer ?>"></td>

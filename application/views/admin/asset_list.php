@@ -1,12 +1,16 @@
+<?php 
+var_dump($this->_ci_cached_vars);
+
+?>
+
 <!-- Main content -->
 <section class="content">
 
     <div class="row">
         <div class="col-xs-12 text-right">
             <div class="form-group">
-                <?php $assets=$data_set[0];?>
-                <a class="btn btn-sm btn-info" href="<?php echo base_url() . 'asset/assetEdit/' . $assets->id; ?>"><i class="fa fa-pencil"></i></a>
-                <a class="btn btn-sm btn-danger deleteUser" href="<?php echo base_url() . 'asset/assetDelete/' . $assets->id; ?>" onclick="return confirm_delete()"><i class="fa fa-trash"></i></a>
+                <a class="btn btn-sm btn-info" href="<?php echo base_url() . 'asset/assetEdit/' //. $assets->id; ?>"><i class="fa fa-pencil"></i></a>
+                <a class="btn btn-sm btn-danger deleteUser" href="<?php echo base_url()// . 'asset/assetDelete/' . $assets->id; ?>" onclick="return confirm_delete()"><i class="fa fa-trash"></i></a>
             </div>
         </div>
     </div>

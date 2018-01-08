@@ -30,10 +30,10 @@
                         <form action="<?php echo base_url('department/add'); ?>" method="post" <?php if(isset($ajax) && $ajax=='true'){echo 'id=\'ajax-form\'';}?>>
                                   <table class="table table-hover">
                                     <tr>
-                                        <td>Department ID</td><td><input type="text" name="branch_id" required ></td>
+                                        <td>Department ID</td><td><input type="text" name="dept_id" required ></td>
                                     </tr>
                                     <tr>
-                                        <td>Branch Name</td><td><input type="text" name="branch_name" required ></td>
+                                        <td>Branch Name</td><td><input type="text" name="dept_name" required ></td>
                                     </tr>
                                     <tr>
                                         <td>Location</td>
@@ -43,7 +43,7 @@
                                                 <?php
                                                 foreach ($location_list as $location) {
                                                     ?>
-                                                    <option value="<?php echo $location->branch_id ?>"><?php echo $location->branch_name ?></option>
+                                                    <option value="<?php echo $location->id ?>"><?php echo $location->branch_name ?></option>
                                                     <?php
                                                 }
                                                 ?>

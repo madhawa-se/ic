@@ -33,7 +33,7 @@
                                                 <?php
                                                 foreach ($location_list as $location) {
                                                     ?>
-                                                    <option value="<?php echo $location->branch_id ?>" <?php echo ($table_data->location ==$location->branch_id)?"selected":""; ?>><?php echo $location->branch_name  ?></option>
+                                                    <option value="<?php echo $location->id ?>" <?php echo ($table_data->location ==$location->branch_id)?"selected":""; ?>><?php echo $location->branch_name  ?></option>
                                                     <?php
                                                 }
                                                 ?>

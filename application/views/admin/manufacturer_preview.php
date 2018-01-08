@@ -35,7 +35,8 @@
                     </div><!-- /.box-header -->
                     <div class="box-body table-responsive no-padding">
                         <table class="table table-hover">
-                            <tbody><tr>
+                            <tbody>
+                                <tr>
                                     <th>Manufacturer ID</th>
                                     <th>Manufacturer</th>
                                     <th class="text-center">Actions</th>
@@ -49,16 +50,15 @@
                                         <td><?php echo $manufacturer->manufacturer ?></td>
 
                                         <td class="text-center">
-                                            <a class="btn btn-sm btn-info" href="<?php echo base_url().'manufacturer/edit/'.$manufacturer->id; ?>"><i class="fa fa-pencil"></i></a>
-                                            <a class="btn btn-sm btn-danger deleteUser" href="<?php echo base_url().'manufacturer/delete/'.$manufacturer->id; ?>" onclick="return confirm_delete()"><i class="fa fa-trash"></i></a>
+                                            <a class="btn btn-sm btn-info" href="<?php echo base_url() . 'manufacturer/edit/' . $manufacturer->id; ?>"><i class="fa fa-pencil"></i></a>
+                                            <a class="btn btn-sm btn-danger deleteUser" href="<?php echo base_url() . 'manufacturer/delete/' . $manufacturer->id; ?>" onclick="return confirm_delete()"><i class="fa fa-trash"></i></a>
                                         </td>
                                     </tr>
 
-
-                                </tbody>
-                                <?php
-                            }
-                            ?>
+                                    <?php
+                                }
+                                ?>
+                            </tbody>
                         </table>
 
                     </div><!-- /.box-body -->

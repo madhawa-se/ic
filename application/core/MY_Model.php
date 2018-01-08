@@ -56,6 +56,7 @@ class MY_Model extends CI_Model {
                 }
             }
         }
+        
         $q = $this->db->get($this->table_name);
         $data = $q->result();
         $q->free_result();

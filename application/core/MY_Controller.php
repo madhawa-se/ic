@@ -74,6 +74,7 @@ class Crud_Controller extends MY_Controller {
             $this->form_validation->set_rules($rules);
 
             if ($this->form_validation->run() == FALSE) {
+                echo 'fail';
                 $this->load->view($view);
             } else {
                 $update_data = array();
@@ -126,8 +127,8 @@ class Crud_Controller extends MY_Controller {
 
 
     function add_row($view, $rules, $data = NULL, $ajax = FALSE) {
-        if(!$data) {
-            $data=array();
+        if (!$data) {
+            $data = array();
         }
         $data['ajax'] = $ajax;
         if (!empty($_POST)) {
@@ -160,6 +161,29 @@ class Crud_Controller extends MY_Controller {
                         redirect("{$this->controller_name}/add");
                     }
                 }
+            }
+        } else {
+            ($ajax) ? $this->load->view($view, $data) : $this->loadMasterTemplate($view, $data);
+        }
+    }
+
+    function add_row_x($view, $rules, $data = NULL, $ajax = FALSE) {
+        if (!$data) {
+            $data = array();
+        }
+        if (!empty($_POST)) {
+            $this->form_validation->set_rules($rules);
+            if ($this->form_validation->run() == FALSE) {
+                return false;
+            } else {
+                $insert_data = array();
+                foreach ($this->column_names as $column) {
+                    $insert_data[$column] = $this->input->post($column);
+                }
+                $this->load->model($this->model_name);
+                $res = $this->{$this->model_name}->insert($insert_data);
+                $status = $this->db->affected_rows() > 0;
+                return $res;
             }
         } else {
             ($ajax) ? $this->load->view($view, $data) : $this->loadMasterTemplate($view, $data);

@@ -49,16 +49,15 @@
                                         <td><?php echo $model->model_name ?></td>
 
                                         <td class="text-center">
-                                            <a class="btn btn-sm btn-info" href="<?php echo base_url().'model/edit/'.$model->id; ?>"><i class="fa fa-pencil"></i></a>
-                                            <a class="btn btn-sm btn-danger deleteUser" href="<?php echo base_url().'model/delete/'.$model->id; ?>" onclick="return confirm_delete()"><i class="fa fa-trash"></i></a>
+                                            <a class="btn btn-sm btn-info" href="<?php echo base_url() . 'model/edit/' . $model->id; ?>"><i class="fa fa-pencil"></i></a>
+                                            <a class="btn btn-sm btn-danger deleteUser" href="<?php echo base_url() . 'model/delete/' . $model->id; ?>" onclick="return confirm_delete()"><i class="fa fa-trash"></i></a>
                                         </td>
                                     </tr>
+                                    <?php
+                                }
+                                ?>
 
-
-                                </tbody>
-                                <?php
-                            }
-                            ?>
+                            </tbody>
                         </table>
 
                     </div><!-- /.box-body -->

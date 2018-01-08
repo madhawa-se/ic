@@ -51,7 +51,7 @@
                                                 <?php
                                                 foreach ($manufacturer_list as $manufacturer) {
                                                     ?>
-                                                    <option value="<?php echo $manufacturer->manufacturer ?>"><?php echo $manufacturer->manufacturer ?></option>
+                                                    <option value="<?php echo $manufacturer->id ?>"><?php echo $manufacturer->manufacturer ?></option>
                                                     <?php
                                                 }
                                                 ?>
@@ -77,7 +77,7 @@
                                                 <?php
                                                 foreach ($model_list as $model) {
                                                     ?>
-                                                    <option value="<?php echo $model->model_id ?>"><?php echo $model->model_name ?></option>
+                                                    <option value="<?php echo $model->id ?>"><?php echo $model->model_name ?></option>
                                                     <?php
                                                 }
                                                 ?>
@@ -92,7 +92,7 @@
                                                 <?php
                                                 foreach ($asset_type_list as $asset_type) {
                                                     ?>
-                                                    <option value="<?php echo $asset_type->asset_type_id ?>"><?php echo $asset_type->asset_type ?></option>
+                                                    <option value="<?php echo $asset_type->id ?>"><?php echo $asset_type->asset_type ?></option>
                                                     <?php
                                                 }
                                                 ?>
@@ -100,7 +100,7 @@
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td>Location</td><td><input type="text" name="location" /></td>
+                                        <td>Location</td><td><input type="text" name="locations" /></td>
                                     </tr>
                                     <tr>
                                         <td>Department</td>
@@ -110,7 +110,7 @@
                                                 <?php
                                                 foreach ($department_list as $department) {
                                                     ?>
-                                                    <option value="<?php echo $department->dept_id ?>"><?php echo $department->dept_name ?></option>
+                                                    <option value="<?php echo $department->id ?>"><?php echo $department->dept_name ?></option>
                                                     <?php
                                                 }
                                                 ?>
@@ -131,7 +131,7 @@
                                                 <?php
                                                 foreach ($employee_list as $employee) {
                                                     ?>
-                                                    <option value="<?php echo $employee->emp_id ?>"><?php echo $employee->emp_name ?></option>
+                                                    <option value="<?php echo $employee->id ?>"><?php echo $employee->emp_name ?></option>
                                                     <?php
                                                 }
                                                 ?>
@@ -151,7 +151,7 @@
                                                 var_dump($license_list);
                                                 foreach ($license_list as $license) {
                                                     ?>
-                                                    <option value="<?php echo $license->license_id ?>"><?php echo $license->license_name ?></option>
+                                                    <option value="<?php echo $license->id ?>"><?php echo $license->license_name ?></option>
                                                     <?php
                                                 }
                                                 ?>
@@ -170,12 +170,12 @@
                                     <tr>
                                         <td>Supplier</td>
                                         <td>
-                                            <select name="supplier" >
+                                            <select name="suppliers" >
                                                 <option value="">Select Supplier</option>  
                                                 <?php
-                                                foreach ($supplier_list as $supplier) {
+                                                foreach ($supplier_list as $suppliers) {
                                                     ?>
-                                                    <option value="<?php echo $supplier->supplier_id ?>"><?php echo $supplier->supplier_name ?></option>
+                                                    <option value="<?php echo $suppliers->id ?>"><?php echo $suppliers->supplier_name ?></option>
                                                     <?php
                                                 }
                                                 ?>
@@ -203,7 +203,7 @@
                                                 <?php
                                                 foreach ($department_list as $department) {
                                                     ?>
-                                                    <option value="<?php echo $department->dept_id ?>"><?php echo $department->dept_name ?></option>
+                                                    <option value="<?php echo $department->id ?>"><?php echo $department->dept_name ?></option>
                                                     <?php
                                                 }
                                                 ?>
