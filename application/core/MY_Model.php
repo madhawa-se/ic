@@ -56,7 +56,9 @@ class MY_Model extends CI_Model {
                 }
             }
         }
-        
+        if ($args != NULL && isset($args['where'])) {
+            $this->db->where("{$this->table_name}"."."."$this->primary_key", $args['where']);
+        } 
         $q = $this->db->get($this->table_name);
         $data = $q->result();
         $q->free_result();

@@ -57,7 +57,7 @@ class Asset extends Crud_Controller {
             )
         ));
         $this->PreviewTable($data_set, 'admin/assets_preview');
-        echo $this->db->last_query();
+       // echo $this->db->last_query();
     }
 
     public function edit($id) {
@@ -130,77 +130,79 @@ class Asset extends Crud_Controller {
         parent::delete_row($id);
     }
 
-    public function preview($id=null) {
+    public function preview($id = null) {
 
         $this->load->model('Model_asset');
-        if(!$id){
-        $data_set = $this->Model_asset->get_all(array(
-            'select' => 'assets.id,assets.asset_id,hostname,serial_number,assets.manufacturer,model_name,branch_name,asset_type.asset_type,country.country,dept_name,license_name,serial_number,sap_asset_id,assigned_to,assigned_date,ip_address,mac_address,suppliers,purchase_date,managed_by,asset_lifetime,last_modified_date,last_modified_user,notes,warranty_expiry_date',
-            'join' => array(
-                array(
-                    'table' => 'model',
-                    'condition' => 'assets.model_number=model.model_id'
+        if (!$id) {
+            $data_set = $this->Model_asset->get_all(array(
+                'select' => 'assets.id,assets.asset_id,hostname,serial_number,assets.manufacturer,model_name,branch_name,asset_type.asset_type,country.country,dept_name,license_name,serial_number,sap_asset_id,assigned_to,assigned_date,ip_address,mac_address,suppliers,purchase_date,managed_by,asset_lifetime,last_modified_date,last_modified_user,notes,warranty_expiry_date',
+                'join' => array(
+                    array(
+                        'table' => 'model',
+                        'condition' => 'assets.model_number=model.model_id'
+                    ),
+                    array(
+                        'table' => 'locations',
+                        'condition' => 'locations.branch_id=assets.locations'
+                    ),
+                    array(
+                        'table' => 'asset_type',
+                        'condition' => 'asset_type.asset_type_id=assets.asset_type'
+                    ),
+                    array(
+                        'table' => 'country',
+                        'condition' => 'country.country_id=locations.country'
+                    ),
+                    array(
+                        'table' => 'department',
+                        'condition' => 'department.dept_id=assets.department'
+                    ),
+                    array(
+                        'table' => 'license_registry',
+                        'condition' => 'license_registry.asset_id = assets.asset_id'
+                    ),
+                    array(
+                        'table' => 'licenses',
+                        'condition' => 'licenses.license_id = license_registry.license_id'
+                    ),
+                )
+            ));
+                 $this->PreviewTable($data_set, 'admin/asset_list');
+        } else {
+            $data_set = $this->Model_asset->get_all(array(
+                'select' => 'assets.id,assets.asset_id,hostname,serial_number,assets.manufacturer,model_name,branch_name,asset_type.asset_type,country.country,dept_name,license_name,serial_number,sap_asset_id,assigned_to,assigned_date,ip_address,mac_address,suppliers,purchase_date,managed_by,asset_lifetime,last_modified_date,last_modified_user,notes,warranty_expiry_date',
+                'join' => array(
+                    array(
+                        'table' => 'model',
+                        'condition' => 'assets.model_number=model.model_id'
+                    ),
+                    array(
+                        'table' => 'locations',
+                        'condition' => 'locations.branch_id=assets.locations'
+                    ),
+                    array(
+                        'table' => 'asset_type',
+                        'condition' => 'asset_type.asset_type_id=assets.asset_type'
+                    ),
+                    array(
+                        'table' => 'country',
+                        'condition' => 'country.country_id=locations.country'
+                    ),
+                    array(
+                        'table' => 'department',
+                        'condition' => 'department.dept_id=assets.department'
+                    ),
+                    array(
+                        'table' => 'license_registry',
+                        'condition' => 'license_registry.asset_id = assets.asset_id'
+                    ),
+                    array(
+                        'table' => 'licenses',
+                        'condition' => 'licenses.license_id = license_registry.license_id'
+                    ),
                 ),
-                array(
-                    'table' => 'locations',
-                    'condition' => 'locations.branch_id=assets.locations'
-                ),
-                array(
-                    'table' => 'asset_type',
-                    'condition' => 'asset_type.asset_type_id=assets.asset_type'
-                ),
-                array(
-                    'table' => 'country',
-                    'condition' => 'country.country_id=locations.country'
-                ),
-                array(
-                    'table' => 'department',
-                    'condition' => 'department.dept_id=assets.department'
-                ),
-                array(
-                    'table' => 'license_registry',
-                    'condition' => 'license_registry.asset_id = assets.asset_id'
-                ),
-                array(
-                    'table' => 'licenses',
-                    'condition' => 'licenses.license_id = license_registry.license_id'
-                ),
-            )
-        ));
-        }else{
-              $data_set = $this->Model_asset->get(array(
-            'select' => 'assets.id,assets.asset_id,hostname,serial_number,assets.manufacturer,model_name,branch_name,asset_type.asset_type,country.country,dept_name,license_name,serial_number,sap_asset_id,assigned_to,assigned_date,ip_address,mac_address,suppliers,purchase_date,managed_by,asset_lifetime,last_modified_date,last_modified_user,notes,warranty_expiry_date',
-            'join' => array(
-                array(
-                    'table' => 'model',
-                    'condition' => 'assets.model_number=model.model_id'
-                ),
-                array(
-                    'table' => 'locations',
-                    'condition' => 'locations.branch_id=assets.locations'
-                ),
-                array(
-                    'table' => 'asset_type',
-                    'condition' => 'asset_type.asset_type_id=assets.asset_type'
-                ),
-                array(
-                    'table' => 'country',
-                    'condition' => 'country.country_id=locations.country'
-                ),
-                array(
-                    'table' => 'department',
-                    'condition' => 'department.dept_id=assets.department'
-                ),
-                array(
-                    'table' => 'license_registry',
-                    'condition' => 'license_registry.asset_id = assets.asset_id'
-                ),
-                array(
-                    'table' => 'licenses',
-                    'condition' => 'licenses.license_id = license_registry.license_id'
-                ),
-            )
-        ));
+                'where' => $id,
+            ));
         }
         //echo $this->db->last_query();
         $this->PreviewTable($data_set, 'admin/asset_list');
