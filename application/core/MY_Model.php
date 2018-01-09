@@ -56,8 +56,16 @@ class MY_Model extends CI_Model {
                 }
             }
         }
+        
+        
+        // seelct all tables if selec is not specified
+        if ($args != NULL && isset($args['group'])) {
+            $this->db->group_by($args['group']); 
+        }
+       
+        
         if ($args != NULL && isset($args['where'])) {
-            $this->db->where("{$this->table_name}"."."."$this->primary_key", $args['where']);
+            $this->db->where("'{$this->table_name}"."."."$this->primary_key'", $args['where']);
         } 
         $q = $this->db->get($this->table_name);
         $data = $q->result();

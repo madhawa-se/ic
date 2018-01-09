@@ -12,7 +12,8 @@ class Asset extends Crud_Controller {
     public function Index() {
         $this->load->model('Model_asset');
         $data_set = $this->Model_asset->get_all(array(
-            'select' => 'assets.id,assets.asset_id,hostname,serial_number,assets.manufacturer,model_name,branch_name,asset_type.asset_type,country.country,dept_name,license_name',
+            'select' => 'assets.id,assets.asset_id,hostname,serial_number,assets.manufacturer,model_name,branch_name,asset_type.asset_type,country.country,dept_name,GROUP_CONCAT(license_name SEPARATOR \'<br>\') as license_name',
+            'group' => 'assets.id',
             'join' => array(
                 array(
                     'table' => 'manufacturer',
@@ -57,7 +58,7 @@ class Asset extends Crud_Controller {
             )
         ));
         $this->PreviewTable($data_set, 'admin/assets_preview');
-       // echo $this->db->last_query();
+        echo $this->db->last_query();
     }
 
     public function edit($id) {
@@ -133,79 +134,104 @@ class Asset extends Crud_Controller {
     public function preview($id = null) {
 
         $this->load->model('Model_asset');
-        if (!$id) {
+        if ($id) {
             $data_set = $this->Model_asset->get_all(array(
-                'select' => 'assets.id,assets.asset_id,hostname,serial_number,assets.manufacturer,model_name,branch_name,asset_type.asset_type,country.country,dept_name,license_name,serial_number,sap_asset_id,assigned_to,assigned_date,ip_address,mac_address,suppliers,purchase_date,managed_by,asset_lifetime,last_modified_date,last_modified_user,notes,warranty_expiry_date',
-                'join' => array(
+                'select' => '*',
+                'join' => array(array(
+                        'table' => 'manufacturer',
+                        'condition' => 'assets.manufacturer=manufacturer.id'
+                    ),
                     array(
                         'table' => 'model',
-                        'condition' => 'assets.model_number=model.model_id'
-                    ),
-                    array(
-                        'table' => 'locations',
-                        'condition' => 'locations.branch_id=assets.locations'
-                    ),
-                    array(
-                        'table' => 'asset_type',
-                        'condition' => 'asset_type.asset_type_id=assets.asset_type'
-                    ),
-                    array(
-                        'table' => 'country',
-                        'condition' => 'country.country_id=locations.country'
+                        'condition' => 'assets.model_number=model.id'
                     ),
                     array(
                         'table' => 'department',
-                        'condition' => 'department.dept_id=assets.department'
+                        'condition' => 'assets.managed_by = department.id'
+                    ),
+                    array(
+                        'table' => 'employee',
+                        'condition' => 'assets.assigned_to=employee.id'
+                    ),
+                    array(
+                        'table' => 'asset_type',
+                        'condition' => 'assets.asset_type=asset_type.id'
+                    ),
+                    array(
+                        'table' => 'suppliers',
+                        'condition' => 'assets.suppliers=suppliers.id'
+                    ),
+                    array(
+                        'table' => 'locations',
+                        'condition' => 'assets.locations = locations.id'
+                    ),
+                    array(
+                        'table' => 'country',
+                        'condition' => 'locations.country = country.id'
                     ),
                     array(
                         'table' => 'license_registry',
-                        'condition' => 'license_registry.asset_id = assets.asset_id'
+                        'condition' => 'license_registry.asset_id = assets.id'
                     ),
                     array(
                         'table' => 'licenses',
-                        'condition' => 'licenses.license_id = license_registry.license_id'
-                    ),
-                )
+                        'condition' => 'license_registry.license_id = licenses.id'
+                    )
+                ),
+                "where" => $id
             ));
-                 $this->PreviewTable($data_set, 'admin/asset_list');
+            var_dump($data_set);
+            $this->PreviewTable($data_set, 'admin/asset_list');
+            echo $this->db->last_query();
         } else {
             $data_set = $this->Model_asset->get_all(array(
-                'select' => 'assets.id,assets.asset_id,hostname,serial_number,assets.manufacturer,model_name,branch_name,asset_type.asset_type,country.country,dept_name,license_name,serial_number,sap_asset_id,assigned_to,assigned_date,ip_address,mac_address,suppliers,purchase_date,managed_by,asset_lifetime,last_modified_date,last_modified_user,notes,warranty_expiry_date',
-                'join' => array(
+                'select' => 'assets.id,assets.asset_id,hostname,serial_number,assets.manufacturer,model_name,branch_name,asset_type.asset_type,country.country,dept_name,GROUP_CONCAT(license_name SEPARATOR \'<br\') as license_name',
+                'join' => array(array(
+                        'table' => 'manufacturer',
+                        'condition' => 'assets.manufacturer=manufacturer.id'
+                    ),
                     array(
                         'table' => 'model',
-                        'condition' => 'assets.model_number=model.model_id'
-                    ),
-                    array(
-                        'table' => 'locations',
-                        'condition' => 'locations.branch_id=assets.locations'
-                    ),
-                    array(
-                        'table' => 'asset_type',
-                        'condition' => 'asset_type.asset_type_id=assets.asset_type'
-                    ),
-                    array(
-                        'table' => 'country',
-                        'condition' => 'country.country_id=locations.country'
+                        'condition' => 'assets.model_number=model.id'
                     ),
                     array(
                         'table' => 'department',
-                        'condition' => 'department.dept_id=assets.department'
+                        'condition' => 'assets.managed_by = department.id'
+                    ),
+                    array(
+                        'table' => 'employee',
+                        'condition' => 'assets.assigned_to=employee.id'
+                    ),
+                    array(
+                        'table' => 'asset_type',
+                        'condition' => 'assets.asset_type=asset_type.id'
+                    ),
+                    array(
+                        'table' => 'suppliers',
+                        'condition' => 'assets.suppliers=suppliers.id'
+                    ),
+                    array(
+                        'table' => 'locations',
+                        'condition' => 'assets.locations = locations.id'
+                    ),
+                    array(
+                        'table' => 'country',
+                        'condition' => 'locations.country = country.id'
                     ),
                     array(
                         'table' => 'license_registry',
-                        'condition' => 'license_registry.asset_id = assets.asset_id'
+                        'condition' => 'license_registry.asset_id = assets.id'
                     ),
                     array(
                         'table' => 'licenses',
-                        'condition' => 'licenses.license_id = license_registry.license_id'
-                    ),
+                        'condition' => 'license_registry.license_id = licenses.id'
+                    )
                 ),
-                'where' => $id,
             ));
+//echo $this->db->last_query();
+            $this->PreviewTable($data_set, 'admin/assets_preview');
+            echo $this->db->last_query();
         }
-        //echo $this->db->last_query();
-        $this->PreviewTable($data_set, 'admin/asset_list');
     }
 
 }

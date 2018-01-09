@@ -40,13 +40,11 @@
                                 <th>Asset ID</th>
                                 <th>Host Name</th>
                                 <th>Serial number</th>
-
                                 <th>Manufacturer</th>
                                 <th>Model Number</th>
                                 <th>Asset Type</th>
                                 <th>Location</th>
                                 <th>Department</th>
-
                                 <th>Licenses</th>
                                 <th class="text-center">Actions</th>
                             </tr>

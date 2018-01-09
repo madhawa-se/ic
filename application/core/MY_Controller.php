@@ -69,6 +69,13 @@ class Crud_Controller extends MY_Controller {
         $this->loadMasterTemplate($view, $data);
     }
 
+    public function insert_table($insert_data) {
+        $this->load->model($this->model_name);
+        $res = $this->{$this->model_name}->insert($insert_data);
+        $status = $this->db->affected_rows() > 0;
+        return ($status) ? $res : $status;
+    }
+
     public function update_row($view, $rules, $msg = NULL) {
         if (!empty($_POST)) {
             $this->form_validation->set_rules($rules);
@@ -126,7 +133,7 @@ class Crud_Controller extends MY_Controller {
 //    }
 
 
-    function add_row($view, $rules, $data = NULL, $ajax = FALSE) {
+    function add_row($view, $rules, $data = NULL, $ajax = FALSE, $column_data = FALSE) {
         if (!$data) {
             $data = array();
         }
@@ -139,21 +146,23 @@ class Crud_Controller extends MY_Controller {
                 $insert_data = array();
                 foreach ($this->column_names as $column) {
                     $insert_data[$column] = $this->input->post($column);
+                    if ($column_data) {
+                        echo 'dude';
+                        $insert_data = array_merge($insert_data, $column_data);
+                    }
                 }
-                $this->load->model($this->model_name);
-                $res = $this->{$this->model_name}->insert($insert_data);
-                $status = $this->db->affected_rows() > 0;
+                $res = $this->insert_table($insert_data);
                 $msg_success = "Successfully added {$this->table_name}!";
                 $msg_fail = "Unable to add {$this->table_name}, Please check";
 
                 if ($ajax) {
-                    if ($status === true) {
+                    if ($res !== FALSE) {
                         $this->ajax_return(true, $res, $msg_success);
                     } else {
                         $this->ajax_return(false, '', $msg_fail);
                     }
                 } else {
-                    if ($status === true) {
+                    if ($res !== FALSE) {
                         $this->session->set_flashdata('success', $msg_success);
                         redirect($this->controller_name);
                     } else {

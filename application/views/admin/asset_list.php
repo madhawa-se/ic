@@ -1,5 +1,5 @@
 <?php 
-var_dump($this->_ci_cached_vars);
+var_dump($data_set);
 
 ?>
 
@@ -19,9 +19,9 @@ var_dump($this->_ci_cached_vars);
 
     <section class="main-content">
         <ul class="nav nav-tabs">
-            <li class="active"><a data-toggle="tab" href="#home">Asset Description</a></li>
-            <li><a data-toggle="tab" href="#menu1">Asset Description</a></li>
-            <li><a data-toggle="tab" href="#menu2">Asset Description</a></li>
+            <li class="active"><a data-toggle="tab" href="#home">Tab 1</a></li>
+            <li><a data-toggle="tab" href="#menu1">Tab 2</a></li>
+            <li><a data-toggle="tab" href="#menu2">Tab 3</a></li>
 
 
         </ul>
@@ -45,14 +45,14 @@ var_dump($this->_ci_cached_vars);
                     if (!empty($data_set)) {
                         ?>
                         <tr>
-                            <td><?php echo $assets->asset_id ?></td>
-                            <td><?php echo $assets->hostname ?></td>
-                            <td><?php echo $assets->serial_number ?></td>
-                            <td><?php echo $assets->sap_asset_id ?></td>
-                            <td><?php echo $assets->manufacturer ?></td>
-                            <td><?php echo $assets->model_name ?></td>
-                            <td><?php echo $assets->asset_type ?></td>
-                            <td><?php echo $assets->branch_name ?></td>
+                            <td><?php echo $data_set->asset_id ?></td>
+                            <td><?php echo $data_set->hostname ?></td>
+                            <td><?php echo $data_set->serial_number ?></td>
+                            <td><?php echo $data_set->sap_asset_id ?></td>
+                            <td><?php echo $data_set->manufacturer ?></td>
+                            <td><?php echo $data_set->model_name ?></td>
+                            <td><?php echo $data_set->asset_type ?></td>
+                            <td><?php echo $data_set->branch_name ?></td>
                         </tr>
     <?php
 }
